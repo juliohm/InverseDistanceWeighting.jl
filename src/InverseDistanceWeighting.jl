@@ -26,7 +26,7 @@ using NearestNeighbors
 export InvDistWeight
 
 @estimsolver InvDistWeight begin
-  @param k = nothing
+  @param neighbors = nothing
   @param metric = Euclidean()
 end
 
@@ -49,11 +49,14 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
     # get valid data for variable
     X, z = valid(pdata, var)
 
+    # number of data points for variable
+    ndata = length(z)
+
     # allocate memory
     varμ = Vector{V}(npoints(pdomain))
     varσ = Vector{V}(npoints(pdomain))
 
-    if !isempty(z)
+    if ndata > 0
       # fit search tree
       kdtree = KDTree(X, varparams.metric)
 
@@ -64,10 +67,11 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
       for (loc, datloc) in datamap(problem, var)
         estimated[loc] = true
         varμ[loc] = value(pdata, datloc, var)
+        varσ[loc] = zero(V)
       end
 
       # determine number of nearest neighbors to use
-      k = varparams.k == nothing ? length(z) : varparams.k
+      k = varparams.neighbors == nothing ? ndata : varparams.neighbors
 
       @assert k ≤ npoints(pdata) "k must be smaller or equal to number of data points"
 
@@ -78,7 +82,7 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
 
           idxs, dists = knn(kdtree, x, k)
 
-          weights = one(eltype(dists)) ./ dists
+          weights = one(V) ./ dists
           weights /= sum(weights)
 
           varμ[location] = weights ⋅ z[idxs]
