@@ -25,7 +25,7 @@ This package is part of the [GeoStats.jl](https://github.com/juliohm/GeoStats.jl
 
 For a simple example of usage, please check [this notebook](docs/Usage.ipynb).
 
-### Asking for help
+## Asking for help
 
 If you have any questions, please [open an issue](https://github.com/juliohm/InverseDistanceWeights.jl/issues).
 
