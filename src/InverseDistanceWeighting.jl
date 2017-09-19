@@ -73,7 +73,7 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
       # determine number of nearest neighbors to use
       k = varparams.neighbors == nothing ? ndata : varparams.neighbors
 
-      @assert k ≤ npoints(pdata) "k must be smaller or equal to number of data points"
+      @assert k ≤ ndata "number of neighbors must be smaller or equal to number of data points"
 
       # estimation loop
       for location in SimplePath(pdomain)
