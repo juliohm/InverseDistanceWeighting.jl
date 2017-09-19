@@ -25,6 +25,16 @@ using NearestNeighbors
 
 export InvDistWeight
 
+"""
+    InvDistWeight(var₁=>param₁, var₂=>param₂, ...)
+
+Inverse distance weighting estimation solver.
+
+## Parameters
+
+* `neighbors` - Number of neighbors (default to all data locations)
+* `metric`    - A metric defined in Distances.jl (default to Euclidean()
+"""
 @estimsolver InvDistWeight begin
   @param neighbors = nothing
   @param metric = Euclidean()
