@@ -3,7 +3,7 @@
 [![][travis-img]][travis-url] [![][julia-pkg-img]][julia-pkg-url] [![][codecov-img]][codecov-url]
 
 This package provides a high-performance implementation of the inverse distance weighting scheme introduced in
-the very early days of geostatistics (see [Isaaks 1990](https://www.amazon.com/Introduction-Applied-Geostatistics-Edward-Isaaks/dp/0195050134)).
+the very early days of geostatistics (see [Shepard 1968](https://dl.acm.org/citation.cfm?id=810616)).
 It is perhaps the simplest first attempt in the literature to perform estimation based on the notion of proximity to data locations.
 
 This implementation makes use of k-d trees from the [NearestNeighbors.jl](https://github.com/KristofferC/NearestNeighbors.jl)
