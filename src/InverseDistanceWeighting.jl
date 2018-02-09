@@ -33,11 +33,11 @@ Inverse distance weighting estimation solver.
 ## Parameters
 
 * `neighbors` - Number of neighbors (default to all data locations)
-* `metric`    - A metric defined in Distances.jl (default to Euclidean()
+* `distance`  - A distance defined in Distances.jl (default to Euclidean()
 """
 @estimsolver InvDistWeight begin
   @param neighbors = nothing
-  @param metric = Euclidean()
+  @param distance = Euclidean()
 end
 
 function solve(problem::EstimationProblem, solver::InvDistWeight)
@@ -68,7 +68,7 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
 
     if ndata > 0
       # fit search tree
-      kdtree = KDTree(X, varparams.metric)
+      kdtree = KDTree(X, varparams.distance)
 
       # keep track of estimated locations
       estimated = falses(npoints(pdomain))
