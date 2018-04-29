@@ -21,6 +21,7 @@ using GeoStatsDevTools
 
 using Reexport
 using NearestNeighbors
+using StaticArrays
 @reexport using Distances
 
 export InvDistWeight
@@ -85,12 +86,15 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
 
       @assert k ≤ ndata "number of neighbors must be smaller or equal to number of data points"
 
+      # pre-allocate memory for coordinates
+      coords = MVector{ndims(pdomain),coordtype(pdomain)}()
+
       # estimation loop
       for location in SimplePath(pdomain)
         if !estimated[location]
-          x = coordinates(pdomain, location)
+          coordinates!(coords, pdomain, location)
 
-          idxs, dists = knn(kdtree, x, k)
+          idxs, dists = knn(kdtree, coords, k)
 
           weights = one(V) ./ dists
           weights /= sum(weights)
