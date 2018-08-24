@@ -3,17 +3,17 @@
 # Licensed under the ISC License. See LICENCE in the project root.
 # ------------------------------------------------------------------
 
-__precompile__()
-
 module InverseDistanceWeighting
 
-importall GeoStatsBase
+using GeoStatsBase
 using GeoStatsDevTools
 
 using Reexport
 using NearestNeighbors
 using StaticArrays
 @reexport using Distances
+
+import GeoStatsBase: solve
 
 export InvDistWeight
 
@@ -55,8 +55,8 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
     ndata = length(z)
 
     # allocate memory
-    varμ = Vector{V}(npoints(pdomain))
-    varσ = Vector{V}(npoints(pdomain))
+    varμ = Vector{V}(undef, npoints(pdomain))
+    varσ = Vector{V}(undef, npoints(pdomain))
 
     if ndata > 0
       # fit search tree
@@ -78,7 +78,7 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
       @assert k ≤ ndata "number of neighbors must be smaller or equal to number of data points"
 
       # pre-allocate memory for coordinates
-      coords = MVector{ndims(pdomain),coordtype(pdomain)}()
+      coords = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
 
       # estimation loop
       for location in SimplePath(pdomain)
@@ -90,7 +90,9 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
           weights = one(V) ./ dists
           weights /= sum(weights)
 
-          varμ[location] = weights ⋅ z[idxs]
+          values = view(z, idxs)
+
+          varμ[location] = sum(weights[i]*values[i] for i in eachindex(values))
           varσ[location] = minimum(dists)
         end
       end

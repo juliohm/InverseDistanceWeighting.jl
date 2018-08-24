@@ -1,12 +1,8 @@
 using GeoStats
 using InverseDistanceWeighting
 using Plots; gr()
-using Base.Test
 using VisualRegressionTests
-
-# setup GR backend for Travis CI
-ENV["GKSwstype"] = "100"
-ENV["PLOTS_TEST"] = "true"
+using Test
 
 # list of maintainers
 maintainers = ["juliohm"]
@@ -17,7 +13,7 @@ istravislinux = "TRAVIS" ∈ keys(ENV) && ENV["TRAVIS_OS_NAME"] == "linux"
 datadir = joinpath(@__DIR__,"data")
 
 @testset "Basic problem" begin
-  geodata = GeoDataFrame(DataFrames.DataFrame(x=[25.,50.,75.], y=[25.,75.,50.], variable=[1.,0.,1.]), [:x,:y])
+  geodata = PointSetData(Dict(:variable => [1.,0.,1.]), [25. 50. 75.;  25. 75. 50.])
   domain = RegularGrid{Float64}(100,100)
   problem = EstimationProblem(geodata, domain, :variable)
 
