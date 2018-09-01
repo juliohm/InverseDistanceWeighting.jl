@@ -32,7 +32,7 @@ If you have any questions, please [open an issue](https://github.com/juliohm/Inv
 [travis-img]: https://travis-ci.org/juliohm/InverseDistanceWeighting.jl.svg?branch=master
 [travis-url]: https://travis-ci.org/juliohm/InverseDistanceWeighting.jl
 
-[julia-pkg-img]: http://pkg.julialang.org/badges/InverseDistanceWeighting_0.6.svg
+[julia-pkg-img]: http://pkg.julialang.org/badges/InverseDistanceWeighting_0.7.svg
 [julia-pkg-url]: http://pkg.julialang.org/?pkg=InverseDistanceWeighting
 
 [codecov-img]: https://codecov.io/gh/juliohm/InverseDistanceWeighting.jl/branch/master/graph/badge.svg
