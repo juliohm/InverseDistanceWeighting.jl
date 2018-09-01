@@ -2,7 +2,7 @@ using GeoStats
 using InverseDistanceWeighting
 using Plots; gr()
 using VisualRegressionTests
-using Test
+using Test, Pkg
 
 # list of maintainers
 maintainers = ["juliohm"]
@@ -11,6 +11,11 @@ maintainers = ["juliohm"]
 ismaintainer = "USER" ∈ keys(ENV) && ENV["USER"] ∈ maintainers
 istravislinux = "TRAVIS" ∈ keys(ENV) && ENV["TRAVIS_OS_NAME"] == "linux"
 datadir = joinpath(@__DIR__,"data")
+
+if ismaintainer
+  Pkg.add("Gtk")
+  using Gtk
+end
 
 @testset "Basic problem" begin
   geodata = PointSetData(Dict(:variable => [1.,0.,1.]), [25. 50. 75.;  25. 75. 50.])
