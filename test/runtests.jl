@@ -9,8 +9,8 @@ using Test, Pkg
 maintainers = ["juliohm"]
 
 # environment settings
+istravis = "TRAVIS" ∈ keys(ENV)
 ismaintainer = "USER" ∈ keys(ENV) && ENV["USER"] ∈ maintainers
-istravislinux = "TRAVIS" ∈ keys(ENV) && ENV["TRAVIS_OS_NAME"] == "linux"
 datadir = joinpath(@__DIR__,"data")
 
 if ismaintainer
@@ -27,13 +27,13 @@ end
 
   solution = solve(problem, solver)
 
-  if ismaintainer || istravislinux
+  if ismaintainer || istravis
     function plot_solution(fname)
       plot(solution, size=(1000,400))
       png(fname)
     end
     refimg = joinpath(datadir,"solution.png")
 
-    @test test_images(VisualTest(plot_solution, refimg), popup=!istravislinux) |> success
+    @test test_images(VisualTest(plot_solution, refimg), popup=!istravis, tol=0.1) |> success
   end
 end
