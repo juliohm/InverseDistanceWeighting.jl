@@ -16,7 +16,7 @@ mainly be used for qualitative purposes.
 Get the latest stable release with Julia's package manager:
 
 ```julia
-Pkg.add("InverseDistanceWeighting")
+] add InverseDistanceWeighting
 ```
 
 ## Usage
