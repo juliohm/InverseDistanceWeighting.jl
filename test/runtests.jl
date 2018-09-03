@@ -1,4 +1,5 @@
-using GeoStats
+using GeoStatsBase
+using GeoStatsDevTools
 using InverseDistanceWeighting
 using Plots; gr()
 using VisualRegressionTests
