@@ -1,6 +1,6 @@
 # InverseDistanceWeighting.jl
 
-[![][travis-img]][travis-url] [![][julia-pkg-img]][julia-pkg-url] [![][codecov-img]][codecov-url]
+[![][travis-img]][travis-url] [![][codecov-img]][codecov-url]
 
 This package provides a high-performance implementation of the inverse distance weighting scheme introduced in
 the very early days of geostatistics (see [Shepard 1968](https://dl.acm.org/citation.cfm?id=810616)).
@@ -31,9 +31,6 @@ If you have any questions, please [open an issue](https://github.com/juliohm/Inv
 
 [travis-img]: https://travis-ci.org/juliohm/InverseDistanceWeighting.jl.svg?branch=master
 [travis-url]: https://travis-ci.org/juliohm/InverseDistanceWeighting.jl
-
-[julia-pkg-img]: http://pkg.julialang.org/badges/InverseDistanceWeighting_0.7.svg
-[julia-pkg-url]: http://pkg.julialang.org/?pkg=InverseDistanceWeighting
 
 [codecov-img]: https://codecov.io/gh/juliohm/InverseDistanceWeighting.jl/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/juliohm/InverseDistanceWeighting.jl
