@@ -23,7 +23,7 @@ Inverse distance weighting estimation solver.
 
 ## Parameters
 
-* `neighbors` - Number of neighbors (default to all data locations)
+* `neighbors` - Number of neighbors (default to 10% of data)
 * `distance`  - A distance defined in Distances.jl (default to Euclidean()
 """
 @estimsolver InvDistWeight begin
@@ -73,7 +73,7 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
     end
 
     # determine number of nearest neighbors to use
-    k = varparams.neighbors == nothing ? ndata : varparams.neighbors
+    k = varparams.neighbors == nothing ? ceil(Int, 0.1ndata) : varparams.neighbors
 
     @assert k ≤ ndata "number of neighbors must be smaller or equal to number of data points"
 

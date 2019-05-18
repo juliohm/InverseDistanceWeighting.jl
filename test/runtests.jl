@@ -23,11 +23,11 @@ end
   domain  = RegularGrid{Float64}(100,100)
   problem = EstimationProblem(geodata, domain, :variable)
 
-  solver = InvDistWeight()
+  solver = InvDistWeight(:variable => (neighbors=3,))
 
   solution = solve(problem, solver)
 
   if visualtests
-    @plottest plot(solution) joinpath(datadir,"solution.png") !istravis
+    @plottest contourf(solution) joinpath(datadir,"solution.png") !istravis
   end
 end
