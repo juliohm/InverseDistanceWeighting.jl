@@ -5,12 +5,10 @@
 module InverseDistanceWeighting
 
 using GeoStatsBase
-using GeoStatsDevTools
 
-using Reexport
 using NearestNeighbors
 using StaticArrays
-@reexport using Distances
+using Distances
 
 import GeoStatsBase: solve
 
