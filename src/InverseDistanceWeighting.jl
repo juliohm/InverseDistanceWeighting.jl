@@ -66,7 +66,7 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
     # consider data locations as already estimated
     for (loc, datloc) in datamap(problem, var)
       estimated[loc] = true
-      varμ[loc] = value(pdata, datloc, var)
+      varμ[loc] = pdata[datloc,var]
       varσ[loc] = zero(V)
     end
 
@@ -79,7 +79,7 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
     coords = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
 
     # estimation loop
-    for location in SimplePath(pdomain)
+    for location in LinearPath(pdomain)
       if !estimated[location]
         coordinates!(coords, pdomain, location)
 
