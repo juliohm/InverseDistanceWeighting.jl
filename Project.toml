@@ -23,7 +23,7 @@ test = ["GeoStatsBase", "Pkg", "VisualRegressionTests", "Plots", "ImageMagick", 
 
 [compat]
 Distances = "^0.8"
-GeoStatsBase = "^0.6"
+GeoStatsBase = "^0.7"
 NearestNeighbors = "^0.4"
 StaticArrays = "^0.12"
 julia = "1"
