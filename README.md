@@ -21,16 +21,16 @@ Get the latest stable release with Julia's package manager:
 
 ## Usage
 
-This package is part of the [GeoStats.jl](https://github.com/juliohm/GeoStats.jl) framework.
+This package is part of the [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) framework.
 
 For a simple example of usage, please check [this notebook](docs/Usage.ipynb).
 
 ## Asking for help
 
-If you have any questions, please [open an issue](https://github.com/juliohm/InverseDistanceWeights.jl/issues).
+If you have any questions, please [open an issue](https://github.com/JuliaEarth/InverseDistanceWeights.jl/issues).
 
-[travis-img]: https://travis-ci.org/juliohm/InverseDistanceWeighting.jl.svg?branch=master
-[travis-url]: https://travis-ci.org/juliohm/InverseDistanceWeighting.jl
+[travis-img]: https://travis-ci.org/JuliaEarth/InverseDistanceWeighting.jl.svg?branch=master
+[travis-url]: https://travis-ci.org/JuliaEarth/InverseDistanceWeighting.jl
 
-[codecov-img]: https://codecov.io/gh/juliohm/InverseDistanceWeighting.jl/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/juliohm/InverseDistanceWeighting.jl
+[codecov-img]: https://codecov.io/gh/JuliaEarth/InverseDistanceWeighting.jl/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/JuliaEarth/InverseDistanceWeighting.jl
