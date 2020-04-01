@@ -1,7 +1,7 @@
 name = "InverseDistanceWeighting"
 uuid = "6a8e3230-34bb-5a86-b9da-9f7447a06da5"
 author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
-version = "0.3.2"
+version = "0.3.3"
 
 [deps]
 Distances = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"

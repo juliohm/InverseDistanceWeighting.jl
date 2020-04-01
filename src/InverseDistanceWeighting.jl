@@ -37,66 +37,67 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
   # result for each variable
   μs = []; σs = []
 
-  for (var,V) in variables(problem)
-    # get user parameters
-    if var ∈ keys(solver.params)
-      varparams = solver.params[var]
-    else
-      varparams = InvDistWeightParam()
-    end
+  for covars in covariables(problem, solver)
+    for var in covars.names
+      # get user parameters
+      varparams = covars.params[(var,)]
 
-    # get valid data for variable
-    X, z = valid(pdata, var)
+      # get variable type
+      V = variables(problem)[var]
 
-    # number of data points for variable
-    ndata = length(z)
+      # get valid data for variable
+      X, z = valid(pdata, var)
 
-    @assert ndata > 0 "estimation requires data"
+      # number of data points for variable
+      ndata = length(z)
 
-    # allocate memory
-    varμ = Vector{V}(undef, npoints(pdomain))
-    varσ = Vector{V}(undef, npoints(pdomain))
+      @assert ndata > 0 "estimation requires data"
 
-    # fit search tree
-    kdtree = KDTree(X, varparams.distance)
+      # allocate memory
+      varμ = Vector{V}(undef, npoints(pdomain))
+      varσ = Vector{V}(undef, npoints(pdomain))
 
-    # keep track of estimated locations
-    estimated = falses(npoints(pdomain))
+      # fit search tree
+      kdtree = KDTree(X, varparams.distance)
 
-    # consider data locations as already estimated
-    for (loc, datloc) in datamap(problem, var)
-      estimated[loc] = true
-      varμ[loc] = pdata[datloc,var]
-      varσ[loc] = zero(V)
-    end
+      # keep track of estimated locations
+      estimated = falses(npoints(pdomain))
 
-    # determine number of nearest neighbors to use
-    k = varparams.neighbors == nothing ? ndata : varparams.neighbors
-
-    @assert k ≤ ndata "number of neighbors must be smaller or equal to number of data points"
-
-    # pre-allocate memory for coordinates
-    coords = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
-
-    # estimation loop
-    for location in LinearPath(pdomain)
-      if !estimated[location]
-        coordinates!(coords, pdomain, location)
-
-        idxs, dists = knn(kdtree, coords, k)
-
-        weights = one(V) ./ dists
-        weights /= sum(weights)
-
-        values = view(z, idxs)
-
-        varμ[location] = sum(weights[i]*values[i] for i in eachindex(values))
-        varσ[location] = minimum(dists)
+      # consider data locations as already estimated
+      for (loc, datloc) in datamap(problem, var)
+        estimated[loc] = true
+        varμ[loc] = pdata[datloc,var]
+        varσ[loc] = zero(V)
       end
-    end
 
-    push!(μs, var => varμ)
-    push!(σs, var => varσ)
+      # determine number of nearest neighbors to use
+      k = varparams.neighbors == nothing ? ndata : varparams.neighbors
+
+      @assert k ≤ ndata "number of neighbors must be smaller or equal to number of data points"
+
+      # pre-allocate memory for coordinates
+      coords = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
+
+      # estimation loop
+      for location in LinearPath(pdomain)
+        if !estimated[location]
+          coordinates!(coords, pdomain, location)
+
+          idxs, dists = knn(kdtree, coords, k)
+
+          weights = one(V) ./ dists
+          weights /= sum(weights)
+
+          values = view(z, idxs)
+
+          varμ[location] = sum(weights[i]*values[i] for i in eachindex(values))
+          varσ[location] = minimum(dists)
+        end
+      end
+
+      push!(μs, var => varμ)
+      push!(σs, var => varσ)
+    end
   end
 
   EstimationSolution(pdomain, Dict(μs), Dict(σs))

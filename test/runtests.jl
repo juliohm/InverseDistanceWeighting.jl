@@ -18,7 +18,7 @@ if !istravis
 end
 
 @testset "Basic problem" begin
-  geodata = PointSetData(Dict(:variable => [1.,0.,1.]), [25. 50. 75.;  25. 75. 50.])
+  geodata = PointSetData(OrderedDict(:variable => [1.,0.,1.]), [25. 50. 75.;  25. 75. 50.])
   domain  = RegularGrid{Float64}(100,100)
   problem = EstimationProblem(geodata, domain, :variable)
 
