@@ -10,7 +10,7 @@ NearestNeighbors = "b8a86587-4115-5ab1-83bc-aa920d37bbce"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 
 [compat]
-Distances = "0.8"
+Distances = "0.8, 0.9"
 GeoStatsBase = "0.7, 0.8, 0.9"
 NearestNeighbors = "0.4"
 StaticArrays = "0.12"
