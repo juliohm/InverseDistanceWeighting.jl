@@ -58,7 +58,12 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
       varσ = Vector{V}(undef, npoints(pdomain))
 
       # fit search tree
-      kdtree = KDTree(X, varparams.distance)
+      M = varparams.distance
+      if M isa NearestNeighbors.MinkowskiMetric
+        tree = KDTree(X, M)
+      else
+        tree = BruteTree(X, M)
+      end
 
       # keep track of estimated locations
       estimated = falses(npoints(pdomain))
@@ -83,7 +88,7 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
         if !estimated[location]
           coordinates!(coords, pdomain, location)
 
-          idxs, dists = knn(kdtree, coords, k)
+          idxs, dists = knn(tree, coords, k)
 
           weights = one(V) ./ dists
           weights /= sum(weights)
