@@ -1,7 +1,7 @@
 name = "InverseDistanceWeighting"
 uuid = "6a8e3230-34bb-5a86-b9da-9f7447a06da5"
 author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
-version = "0.3.5"
+version = "0.3.6"
 
 [deps]
 Distances = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"
@@ -24,6 +24,7 @@ Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 QuartzImageIO = "dca85d43-d64c-5e67-8c65-017450d5d020"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 VisualRegressionTests = "34922c18-7c2a-561c-bac1-01e79b2c4c92"
+Distances = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"
 
 [targets]
-test = ["GeoStatsBase", "Pkg", "VisualRegressionTests", "Plots", "ImageMagick", "QuartzImageIO", "Test"]
+test = ["GeoStatsBase", "Pkg", "VisualRegressionTests", "Plots", "ImageMagick", "Distances", "QuartzImageIO", "Test"]

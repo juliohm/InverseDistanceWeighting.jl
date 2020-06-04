@@ -2,6 +2,7 @@ using GeoStatsBase
 using InverseDistanceWeighting
 using Plots; gr(size=(1000,400))
 using VisualRegressionTests
+using Distances
 using Test, Pkg
 
 # workaround GR warnings
@@ -28,5 +29,19 @@ end
 
   if visualtests
     @plottest contourf(solution) joinpath(datadir,"solution.png") !istravis
+  end
+end
+
+@testset "Haversine" begin
+  geodata = PointSetData(OrderedDict(:variable => [4.0,-1.0,3.0]), [50.0 100.0 200.0; -30.0 30.0 10.0])
+  domain  = RegularGrid((1.0, -89.0), (359.0, 89.0), dims=(200, 100))
+  problem = EstimationProblem(geodata, domain, :variable)
+
+  solver = InvDistWeight(:variable => (distance=Haversine(1.0),))
+
+  solution = solve(problem, solver)
+
+  if visualtests
+    @plottest contourf(solution) joinpath(datadir,"Haversine_solution.png") !istravis
   end
 end
