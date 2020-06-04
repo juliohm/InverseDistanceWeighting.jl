@@ -84,7 +84,7 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
       coords = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
 
       # estimation loop
-      for location in LinearPath(pdomain)
+      for location in traverse(pdomain, LinearPath())
         if !estimated[location]
           coordinates!(coords, pdomain, location)
 
