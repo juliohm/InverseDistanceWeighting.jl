@@ -19,8 +19,8 @@ if !istravis
 end
 
 @testset "Basic problem" begin
-  geodata = PointSetData(OrderedDict(:variable => [1.,0.,1.]), [25. 50. 75.;  25. 75. 50.])
-  domain  = RegularGrid{Float64}(100,100)
+  geodata = georef((variable=[1.,0.,1.],), [25. 50. 75.;  25. 75. 50.])
+  domain  = RegularGrid(100,100)
   problem = EstimationProblem(geodata, domain, :variable)
 
   solver = InvDistWeight(:variable => (neighbors=3,))
@@ -33,7 +33,7 @@ end
 end
 
 @testset "Haversine" begin
-  geodata = PointSetData(OrderedDict(:variable => [4.0,-1.0,3.0]), [50.0 100.0 200.0; -30.0 30.0 10.0])
+  geodata = georef((variable=[4.0,-1.0,3.0],), [50.0 100.0 200.0; -30.0 30.0 10.0])
   domain  = RegularGrid((1.0, -89.0), (359.0, 89.0), dims=(200, 100))
   problem = EstimationProblem(geodata, domain, :variable)
 
