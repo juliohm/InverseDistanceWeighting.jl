@@ -1,7 +1,6 @@
 using GeoStatsBase
 using InverseDistanceWeighting
-using Plots; gr(size=(1000,400))
-using VisualRegressionTests
+using Plots, VisualRegressionTests
 using Distances
 using Test, Pkg
 
