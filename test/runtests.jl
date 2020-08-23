@@ -27,7 +27,7 @@ end
   solution = solve(problem, solver)
 
   if visualtests
-    @plottest contourf(solution) joinpath(datadir,"solution.png") !istravis
+    @plottest contourf(solution,size=(800,400)) joinpath(datadir,"solution.png") !istravis
   end
 end
 
@@ -41,6 +41,6 @@ end
   solution = solve(problem, solver)
 
   if visualtests
-    @plottest contourf(solution) joinpath(datadir,"haversine.png") !istravis
+    @plottest contourf(solution,size=(800,200)) joinpath(datadir,"haversine.png") !istravis
   end
 end

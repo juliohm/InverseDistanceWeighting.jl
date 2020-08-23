@@ -45,8 +45,11 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
       # get variable type
       V = variables(problem)[var]
 
-      # get valid data for variable
-      X, z = valid(pdata, var)
+      # retrieve non-missing data
+      locs = findall(!ismissing, pdata[var])
+      𝒟 = view(pdata, locs)
+      X = coordinates(𝒟)
+      z = 𝒟[var]
 
       # number of data points for variable
       ndata = length(z)
@@ -54,8 +57,8 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
       @assert ndata > 0 "estimation requires data"
 
       # allocate memory
-      varμ = Vector{V}(undef, npoints(pdomain))
-      varσ = Vector{V}(undef, npoints(pdomain))
+      varμ = Vector{V}(undef, nelms(pdomain))
+      varσ = Vector{V}(undef, nelms(pdomain))
 
       # fit search tree
       M = varparams.distance
@@ -66,7 +69,7 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
       end
 
       # keep track of estimated locations
-      estimated = falses(npoints(pdomain))
+      estimated = falses(nelms(pdomain))
 
       # consider data locations as already estimated
       for (loc, datloc) in datamap(problem, var)
@@ -81,7 +84,7 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
       @assert k ≤ ndata "number of neighbors must be smaller or equal to number of data points"
 
       # pre-allocate memory for coordinates
-      coords = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
+      coords = MVector{ncoords(pdomain),coordtype(pdomain)}(undef)
 
       # estimation loop
       for location in traverse(pdomain, LinearPath())
