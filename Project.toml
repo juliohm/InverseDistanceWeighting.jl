@@ -1,7 +1,7 @@
 name = "InverseDistanceWeighting"
 uuid = "6a8e3230-34bb-5a86-b9da-9f7447a06da5"
 author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
-version = "0.4.1"
+version = "0.4.2"
 
 [deps]
 Distances = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"
@@ -11,7 +11,7 @@ StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 
 [compat]
 Distances = "0.8, 0.9"
-GeoStatsBase = "0.12"
+GeoStatsBase = "0.13"
 NearestNeighbors = "0.4"
 StaticArrays = "0.12"
 julia = "1.4"
