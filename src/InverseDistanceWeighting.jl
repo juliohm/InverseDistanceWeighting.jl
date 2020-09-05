@@ -74,7 +74,7 @@ function solve(problem::EstimationProblem, solver::InvDistWeight)
       # consider data locations as already estimated
       for (loc, datloc) in datamap(problem, var)
         estimated[loc] = true
-        varμ[loc] = pdata[datloc,var]
+        varμ[loc] = pdata[var][datloc]
         varσ[loc] = zero(V)
       end
 
