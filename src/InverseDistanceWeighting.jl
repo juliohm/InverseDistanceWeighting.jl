@@ -22,7 +22,11 @@ Inverse distance weighting estimation solver.
 ## Parameters
 
 * `neighbors` - Number of neighbors (default to all data locations)
-* `distance`  - A distance defined in Distances.jl (default to Euclidean()
+* `distance`  - A distance defined in Distances.jl (default to `Euclidean()`)
+
+### References
+
+Shepard 1968. *A two-dimensional interpolation function for irregularly-spaced data.*
 """
 @estimsolver InvDistWeight begin
   @param neighbors = nothing
